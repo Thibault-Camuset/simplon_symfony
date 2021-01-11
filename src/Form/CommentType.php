@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use DateTime;
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,6 @@ class CommentType extends AbstractType
         $builder
             ->add('username')
             ->add('content')
-            ->add('created_at')
             ->add('article')
         ;
     }

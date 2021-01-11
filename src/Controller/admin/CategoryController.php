@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/category")
+ * @Route("/admin/category")
  */
 class CategoryController extends AbstractController
 {
@@ -35,6 +35,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setEnabled('true');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
@@ -91,4 +92,16 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('category_index');
     }
+
+    /**
+     * @Route("/{id}/change-status", name="category_change_status", methods={"GET"})
+     */
+    public function changeStatus(Category $category): Response
+    {
+        $category->setEnabled(!$category->getEnabled());
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('category_index');
+    }
+
+
 }

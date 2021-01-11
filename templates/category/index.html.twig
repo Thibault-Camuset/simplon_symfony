@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
 {% block title %}Category index{% endblock %}
 
@@ -23,6 +23,9 @@
                 <td>
                     <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
                     <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                    <a href="{{ path('category_change_status', {'id': category.id}) }}">
+                        {{ category.enabled ? 'disable' : 'enable' }}
+                    </a>
                 </td>
             </tr>
         {% else %}

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
 {% block title %}Article index{% endblock %}
 
@@ -12,6 +12,7 @@
                 <th>Title</th>
                 <th>Content</th>
                 <th>Cover</th>
+                <th>Categories</th>
                 <th>Published</th>
                 <th>Created_at</th>
                 <th>Updated_at</th>
@@ -25,12 +26,19 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
                 <td>{{ article.cover }}</td>
+                <td>{% for category in article.categories %}
+                        {{ category.name ~ ' |' }}
+                    {% endfor %}
+                </td>
                 <td>{{ article.published ? 'Yes' : 'No' }}</td>
                 <td>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</td>
                 <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                    <a href="{{ path('article_change_status', {'id': article.id}) }}">
+                        {{ article.published ? 'disable' : 'enable' }}
+                    </a>
                 </td>
             </tr>
         {% else %}

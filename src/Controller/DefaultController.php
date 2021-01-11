@@ -43,5 +43,18 @@ class DefaultController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/admin", name="section_admin")
+     */
+    public function adminAction(): Response
+    {
+        return $this->render('admin/admin_home.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
+
+
+
 
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
+use DateTime;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/article")
+ * @Route("/admin/article")
  */
 class ArticleController extends AbstractController
 {
@@ -35,6 +36,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setpublished(false);
+            $article->setCreatedAt(new DateTime());
+            $article->setUpdatedAt(new DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -67,6 +71,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUpdatedAt(new DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index');
@@ -91,4 +96,15 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index');
     }
+
+     /**
+     * @Route("/{id}/change-status", name="article_change_status", methods={"GET"})
+     */
+    public function changeStatus(Article $article): Response
+    {
+        $article->setPublished(!$article->getPublished());
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('article_index');
+    }
+
 }

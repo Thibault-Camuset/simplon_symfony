@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
+use DateTime;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
@@ -35,6 +36,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setCreatedAt(new DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
