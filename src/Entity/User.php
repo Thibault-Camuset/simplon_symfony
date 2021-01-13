@@ -41,6 +41,11 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -131,5 +136,17 @@ class User implements UserInterface
         return $this->roles;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }
