@@ -9,12 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h3>Accueil</h3>
-    <p>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras accumsan mi lacus. Cras eget facilisis leo. Vivamus diam risus, sollicitudin sit amet iaculis eu, dignissim ut mauris. Suspendisse potenti. Donec mollis justo a lacus consectetur, id luctus nunc aliquam. Praesent sit amet mollis lacus. Vivamus ornare nisi mi, at ultricies nisl egestas quis. Sed ultrices ut ligula non ultrices. Fusce sed tincidunt sem, quis tempus eros. Nam sollicitudin aliquam finibus. Cras sed lorem lacus. Sed nec fringilla metus.
-
-Cras eros erat, volutpat eu enim vitae, pellentesque auctor nibh. Fusce eget bibendum tellus. Sed malesuada tortor ac leo scelerisque ornare. Sed sed justo blandit augue vulputate molestie id eget erat. Etiam fermentum ligula in hendrerit facilisis. In elementum a felis id dapibus. Aliquam porta dolor eu augue scelerisque fringilla. Ut eros justo, varius sagittis magna vitae, porta luctus tortor.
+    
+    {% for article in articles %}
+        <div>
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.content }}</p>
+        </div>
+    {% endfor %}
 
 </div>
 {% endblock %}

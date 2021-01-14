@@ -3,6 +3,11 @@
 {% block title %}Article index{% endblock %}
 
 {% block content %}
+    <style>
+        .articles .actions a {
+            padding: 0 5px;
+        }
+    </style>
     <h1>Liste des Articles</h1>
 
     <table class="table table-striped articles">
@@ -30,12 +35,14 @@
                 <td>{{ article.published ? '<i class="fa fa-check" style="color: green"></i>' : '<i class="fa fa-times" style="color: red"></i>' }}</td>
                 <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}"><i class="fa fa-pencil"></i></a>
-                    <a href="{{ path('article_change_status', {'id': article.id}) }}">
-                        {{ article.published ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>' }}
-                    </a>
+                <td class="actions">
+                    <a href="{{ path('article_show', {'id': article.id}) }}" title="Voir"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}" title="Éditer"><i class="fa fa-pencil"></i></a>
+                    {% if not article.published %}
+                        <a href="{{ path('article_change_status', {'id': article.id}) }}" title="Publier"><i class="fa fa-check" style="color: green"></i></a>
+                    {% else %}
+                        <a href="{{ path('article_change_status', {'id': article.id}) }}" title="Cacher"><i class="fa fa-times" style="color: red"></i></a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

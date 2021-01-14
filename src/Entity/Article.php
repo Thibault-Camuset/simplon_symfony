@@ -59,6 +59,7 @@ class Article
      */
     private $comments;
 
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -202,5 +203,6 @@ class Article
         // to show the id of the Category in the select
         // return $this->id;
     }
+
 
 }

@@ -32,15 +32,14 @@
                     {% endif %}
                 </td>
                 <td class="actions">
-                    <a href="{{ path('category_show', {'id': category.id}) }}"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}"><i class="fa fa-pencil"></i></a>
-                    <a href="{{ path('category_change_status', {'id': category.id}) }}">
+                    <a href="{{ path('category_show', {'id': category.id}) }}" title="Voir"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}" title="Éditer"><i class="fa fa-pencil"></i></a>
                         {% if not category.enabled %}
-                            <i class="fa fa-check"></i>
+                            <a href="{{ path('category_change_status', {'id': category.id}) }}" title="Activer"><i class="fa fa-check" style="color: green"></i></a>
                         {% else %}
-                            <i class="fa fa-times"></i>
+                            <a href="{{ path('category_change_status', {'id': category.id}) }}" title="Désactiver"><i class="fa fa-times" style="color: red"></i></a>
                         {% endif %}
-                    </a>
+                    
                 </td>
             </tr>
         {% else %}

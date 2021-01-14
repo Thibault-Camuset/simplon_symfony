@@ -2,10 +2,15 @@
 
 {% block title %}Comment index{% endblock %}
 
-{% block body %}
+{% block content %}
+    <style>
+        .comments .actions a {
+            padding: 0 5px;
+        }
+    </style>
     <h1>Comment index</h1>
 
-    <table class="table">
+    <table class="table table-striped comments">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,9 +27,9 @@
                 <td>{{ comment.username }}</td>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('comment_show', {'id': comment.id}) }}">show</a>
-                    <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+                <td class="actions">
+                    <a href="{{ path('comment_show', {'id': comment.id}) }}" title="Voir"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('comment_edit', {'id': comment.id}) }}" title="Éditer"><i class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('comment_new') }}">Create new</a>
+    <a href="{{ path('comment_new') }}" class="btn btn-primary">Ajouter un commentaire</a>
 {% endblock %}
