@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +16,10 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function homeAction(ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
+    public function homeAction(ArticleRepository $articleRepository, CategoryRepository $categoryRepository, Request $request, PaginatorInterface $paginator): Response
     {
         // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
-        $donnees =  $articleRepository->findAll();
+        $donnees =  $articleRepository->findBy(['published' => true]);
         
         $articles = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
@@ -25,11 +27,36 @@ class DefaultController extends AbstractController
             5 // Nombre de résultats par page
         );
 
+        $categories = $categoryRepository->findAll();
+
         return $this->render('front/default/home.html.twig', [
             'articles' => $articles,
+            'categories' => $categories,
         ]);
     }
 
+
+    /**
+     * @Route("/category/{id}", name="category_list", methods={"GET"})
+     */
+    public function categoryAction(Category $category, CategoryRepository $categoryRepository, Request $request, PaginatorInterface $paginator): Response
+    {
+        $donnees =  $category->getArticles();
+
+
+        $articles = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            5 
+        );
+
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('front/default/category.html.twig', [
+            'articles' => $articles,
+            'categories' => $categories,
+        ]);
+    }
 
 
     /**
