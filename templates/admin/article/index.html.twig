@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block content %}
+    <h1>Liste des Articles</h1>
+
+    <table class="table table-striped articles">
+        <thead>
+            <tr>
+
+                <th style="width: 50px">#</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Cover</th>
+                <th style="width: 50px">Published</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th style="width: 150px">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content|truncate(30) }}</td>
+                <td>{{ article.cover }}</td>
+                <td>{{ article.published ? '<i class="fa fa-check" style="color: green"></i>' : '<i class="fa fa-times" style="color: red"></i>' }}</td>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ path('article_change_status', {'id': article.id}) }}">
+                        {{ article.published ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>' }}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}" class="btn btn-primary">Ajouter un Article</a>
+    
+{% endblock %}

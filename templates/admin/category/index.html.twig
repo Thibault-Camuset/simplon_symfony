@@ -1,0 +1,55 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block content %}
+    <style>
+        .categories .actions a {
+            padding: 0 5px;
+        }
+    </style>
+    <h1>Liste de catégories</h1>
+
+    <table class="table table-striped categories">
+        <thead>
+        <tr>
+            <th style="width: 50px">#</th>
+            <th>Nom</th>
+            <th style="width: 50px">Active</th>
+            <th style="width: 150px">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    {% if category.enabled %}
+                        <i class="fa fa-check" style="color: green"></i>
+                    {% else %}
+                        <i class="fa fa-times" style="color: red"></i>
+                    {% endif %}
+                </td>
+                <td class="actions">
+                    <a href="{{ path('category_show', {'id': category.id}) }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}"><i class="fa fa-pencil"></i></a>
+                    <a href="{{ path('category_change_status', {'id': category.id}) }}">
+                        {% if not category.enabled %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-times"></i>
+                        {% endif %}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category_new') }}" class="btn btn-primary">Ajouter une catégorie</a>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'admin/admin_base.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block title %}Comment{% endblock %}
 
@@ -30,5 +30,5 @@
 
     <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
 
-    {{ include('comment/_delete_form.html.twig') }}
+    {{ include('admin/comment/_delete_form.html.twig') }}
 {% endblock %}

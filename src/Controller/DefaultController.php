@@ -13,7 +13,7 @@ class DefaultController extends AbstractController
      */
     public function homeAction(): Response
     {
-        return $this->render('default/home.html.twig', [
+        return $this->render('front/default/home.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
@@ -25,7 +25,7 @@ class DefaultController extends AbstractController
      */
     public function cguAction(): Response
     {
-        return $this->render('default/cgu.html.twig', [
+        return $this->render('front/default/cgu.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
      */
     public function mentionsLegalesAction(): Response
     {
-        return $this->render('default/mentions-legales.html.twig', [
+        return $this->render('front/default/mentions-legales.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
@@ -48,7 +48,7 @@ class DefaultController extends AbstractController
      */
     public function adminAction(): Response
     {
-        return $this->render('admin/admin_home.html.twig', [
+        return $this->render('admin/default/home.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
     }
