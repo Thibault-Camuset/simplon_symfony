@@ -1,0 +1,43 @@
+/* Base Layout */
+
+.article-list-box {
+  margin: 1em auto;
+  max-width: 800px;
+  width: 95%;
+  font: 18px/1.5 sans-serif;
+}
+.article-list-box div {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  margin: 1em;
+}
+.pagination {
+  background: white !important;
+}
+.pagination span {
+  padding: 0 5px;
+}
+
+/*  Article Layout */
+
+.articles .actions a {
+  padding: 0 5px !important;
+}
+
+/* Categories Layout */
+
+.categories .actions a {
+  padding: 0 5px;
+}
+
+/* Commentaries Layout */
+
+.comments .actions a {
+  padding: 0 5px;
+}
+
+/* Users Layout */
+
+.users .actions a {
+  padding: 0 5px;
+}
