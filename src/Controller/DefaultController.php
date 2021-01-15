@@ -18,13 +18,13 @@ class DefaultController extends AbstractController
      */
     public function homeAction(ArticleRepository $articleRepository, CategoryRepository $categoryRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        // Méthode findBy qui permet de récupérer les données avec des critères de filtre et de tri
+        
         $donnees =  $articleRepository->findBy(['published' => true]);
         
         $articles = $paginator->paginate(
-            $donnees, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
+            $donnees, 
+            $request->query->getInt('page', 1), 
+            5 
         );
 
         $categories = $categoryRepository->findAll();

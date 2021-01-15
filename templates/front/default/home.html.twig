@@ -5,8 +5,8 @@
 {% block body %}
 
 <div class="article-list-box">
-   
-   {% for category in categories %}
+
+    {% for category in categories %}
         <a href="{{ path('category_list', { 'id': category.id}) }}" name="{{ category.id }}" class="btn btn-primary">{{ category.name }}</a>
     {% endfor %}
         <a href="{{ path('home') }}" class="btn btn-primary">Tous</a>
