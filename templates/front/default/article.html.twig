@@ -1,0 +1,14 @@
+{% extends 'front/layout.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+
+<div class="article-list-box">
+
+    <h3>{{ article.title }}</h3>
+    <p>Crée le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i:s') }}</p>
+    <p>{{ article.content }}</p>
+
+</div>
+{% endblock %}

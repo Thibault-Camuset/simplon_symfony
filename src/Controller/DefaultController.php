@@ -19,7 +19,7 @@ class DefaultController extends AbstractController
     public function homeAction(ArticleRepository $articleRepository, CategoryRepository $categoryRepository, Request $request, PaginatorInterface $paginator): Response
     {
         
-        $donnees =  $articleRepository->findBy(['published' => true]);
+        $donnees =  $articleRepository->findBy(['published' => true], ['created_at' => 'DESC']);
         
         $articles = $paginator->paginate(
             $donnees, 
@@ -59,6 +59,9 @@ class DefaultController extends AbstractController
     }
 
 
+
+    
+
     /**
      * @Route("/cgu", name="cgu")
      */
@@ -93,7 +96,17 @@ class DefaultController extends AbstractController
     }
 
 
+    /**
+     * @Route("/article/{id}", name="article_read")
+     */
+    public function articleReadAction(ArticleRepository $articleRepository, $id): Response
+    {
+        $article = $articleRepository->findOneById($id);
 
+        return $this->render('front/default/article.html.twig', [
+            'article'  => $article,
+        ]);
+    }
 
 
 }

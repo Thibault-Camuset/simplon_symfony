@@ -16,7 +16,9 @@
         {% if article.published %}
             <div>
             <h3>{{ article.title }}</h3>
+            <p>Crée le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i:s') }}</p>
             <p>{{ article.content }}</p>
+            <a href="{{ path('article_read', {'id': article.id}) }}" class="btn btn-primary">Lire plus</a>
             </div>
         {% endif %}
     {% endfor %}
